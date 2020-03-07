@@ -1,0 +1,64 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ExToolKit">
+    <Style TargetType="local:ExPopBar">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="PopBackgroud" Value="#FF434346"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="Width" Value="64"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:ExPopBar">
+                    <Border  Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                            Margin="{TemplateBinding Margin}">
+                        <Grid Margin="{TemplateBinding Padding}">
+                            <ContentPresenter ContentSource="Header"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <Popup Name="_Sub_List"
+                                Placement="Bottom"
+                                AllowsTransparency="True"
+                                PopupAnimation="Slide"
+                                Focusable="True"
+                                StaysOpen="False"
+                                IsOpen="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=IsSubPoped,Mode=TwoWay}">
+                                <Border Background="{TemplateBinding PopBackgroud}" Padding="2" Margin="0,0,12,12" MaxHeight="{TemplateBinding MaxHeight}">
+                                    <ScrollViewer VerticalScrollBarVisibility="Auto" 
+                                                  HorizontalScrollBarVisibility="Auto">
+                                        
+                                        <ItemsPresenter VirtualizingPanel.IsVirtualizing="True" 
+                                                        VirtualizingPanel.VirtualizationMode="Recycling"
+                                                        VirtualizingPanel.CacheLength="2" 
+                                                        VirtualizingPanel.CacheLengthUnit="Item"
+                                                        SnapsToDevicePixels="True" UseLayoutRounding="True">
+                                            <!--<ItemsPresenter.CacheMode>
+                                                <BitmapCache/>
+                                            </ItemsPresenter.CacheMode>-->
+                                        </ItemsPresenter>
+                                        
+                                    </ScrollViewer>
+                                    <Border.Effect>
+                                        <DropShadowEffect Color="Black" Opacity="1" ShadowDepth="1" BlurRadius="10"/>
+                                    </Border.Effect>
+                                </Border>
+                            </Popup>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#F0232323"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
